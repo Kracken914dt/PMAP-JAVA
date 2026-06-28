@@ -12,6 +12,10 @@ Aplicación web del módulo Gestión de Materias.
 - Apache Tomcat 10
 - Maven
 
+## Ejecución
+
+En mi entorno, este proyecto lo ejecute con WildFly. El WAR generado por Maven se publica en WildFly y desde allí se accede a la aplicación desde el navegador, aunque lo puede hacer con tomcat.
+
 ## Punto de entrada
 
 - [index.jsp](src/main/webapp/index.jsp)

@@ -44,7 +44,7 @@
     </dependencies>
 
     <build>
-        <finalName>pmap-web</finalName>
+        <finalName>PMAP-Web</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

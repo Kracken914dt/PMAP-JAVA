@@ -182,18 +182,23 @@ public class MateriaForm extends JFrame {
         panel.setOpaque(false);
         panel.setBorder(BorderFactory.createTitledBorder("Buscar por ID"));
 
+        txtBuscarId.setColumns(12);
+        txtBuscarId.setPreferredSize(new Dimension(180, 30));
+
         JButton btnBuscar = crearBoton("Buscar", AZUL);
         btnBuscar.addActionListener(e -> buscarMateria());
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(4, 4, 4, 4);
         gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridy = 0;
 
         gbc.gridx = 0;
-        gbc.gridy = 0;
+        gbc.weightx = 1.0;
         panel.add(txtBuscarId, gbc);
 
         gbc.gridx = 1;
+        gbc.weightx = 0.0;
         panel.add(btnBuscar, gbc);
 
         return panel;
@@ -423,7 +428,17 @@ public class MateriaForm extends JFrame {
     }
 
     private void mostrarError(String mensaje, Exception excepcion) {
-        JOptionPane.showMessageDialog(this, mensaje + "\n" + excepcion.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        String detalle = excepcion.getMessage();
+        if (detalle != null) {
+            String textoNormalizado = detalle.toLowerCase();
+            if (textoNormalizado.contains("communications link failure")
+                    || textoNormalizado.contains("connection refused")
+                    || textoNormalizado.contains("no suitable driver")) {
+                detalle = "No se pudo conectar con MySQL. Verifica que el servidor esté iniciado, que el puerto 3306 esté disponible y que exista la base de datos pmap.";
+            }
+        }
+
+        JOptionPane.showMessageDialog(this, mensaje + "\n" + detalle, "Error", JOptionPane.ERROR_MESSAGE);
     }
 
     public static void main(String[] args) {

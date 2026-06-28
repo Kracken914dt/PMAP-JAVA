@@ -19,6 +19,13 @@ public class MateriaDAO {
     private static final String SQL_ACTUALIZAR = "UPDATE materias SET nombre = ?, descripcion = ?, categoria = ?, estado = ? WHERE id = ?";
     private static final String SQL_ELIMINAR = "DELETE FROM materias WHERE id = ?";
 
+    private SQLException prepararErrorConexion(SQLException excepcion) {
+        return new SQLException(
+                "No fue posible conectar con MySQL. Verifica que el servidor esté activo en localhost:3306 y que la base pmap exista.",
+                excepcion
+        );
+    }
+
     public int insertar(Materia materia) throws SQLException {
         try (Connection conexion = Conexion.getConnection();
              PreparedStatement sentencia = conexion.prepareStatement(SQL_INSERTAR, Statement.RETURN_GENERATED_KEYS)) {

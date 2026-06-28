@@ -7,3 +7,4 @@ target/
 bin/
 out/
 *.log
+config/db.properties
